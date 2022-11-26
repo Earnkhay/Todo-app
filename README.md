@@ -1,10 +1,12 @@
 # my-todo-app
 
+This is a simple todo app that helps users to track their todo, add new todo, search their todos and filter based on status; All, Active and Completed.
+Firebase was used as the database storing users todos.
+
 ## Project setup
 ```
 npm install
 ```
-
 ### Compiles and hot-reloads for development
 ```
 npm run serve
