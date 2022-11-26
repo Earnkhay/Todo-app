@@ -1,11 +1,6 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import '../node_modules/bootstrap/dist/js/bootstrap.js'
-import '@fortawesome/fontawesome-free/css/all.css'
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,9 +12,9 @@ const firebaseConfig = {
   appId: "1:635743242245:web:1e7ce49e6baae9076b746c"
 };
 
-// const app = createApp(App);
-
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-createApp(App).use(store).use(router).mount('#app')
+const db = getFirestore(app);
+
+export { db }
