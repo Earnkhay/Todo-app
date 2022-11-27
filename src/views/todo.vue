@@ -35,11 +35,11 @@
                     <i class="fa-solid fa-arrow-left-long"></i>
                 </div>
                 <div class="w-75">
-                <input class="form-control" v-model="searchName" @input="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
+                    <input class="form-control" v-model="searchName" @input="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
                 </div>
             </div>
 
-        <div class="card" v-for="(todo, id) in todos" :key="id" :class="[todo.done ? 'success' : 'bg-light' ]">
+        <div class="card m-1" v-for="(todo, id) in todos" :key="id" :class="[todo.done ? 'success' : 'bg-light' ]">
             <div class="card-body d-flex justify-content-between">
                 <div class="form-check pt-0 ps-4">
                         <input class="form-check-input" type="checkbox" value="" v-model="todo.done" @click.prevent="toggleDone(todo.id)" id="flexCheckDefault">
@@ -143,8 +143,6 @@ export default class todo extends Vue {
                     fbTodos.push(todo)
                     this.todos = fbTodos
                     this.searchActive = true 
-                }else{
-                    this.todos = []
                 }      
             }) 
         }) 
