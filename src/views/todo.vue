@@ -35,7 +35,7 @@
                     <i class="fa-solid fa-arrow-left-long"></i>
                 </div>
                 <div class="w-75">
-                <input class="form-control" v-model="searchName" @keyup="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
+                <input class="form-control" v-model="searchName" @input="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
                 </div>
             </div>
 
