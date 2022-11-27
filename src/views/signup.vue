@@ -4,8 +4,8 @@
         <div class="row justify-content-center align-items-center p-5 welcomerow">
             <div class="col-md-12 mt-5">
                 <div class="mb-4 mt-5">
-                  <h1 class="p-2">Welcome to your simple todo app</h1>
-                  <h2 class="p-2">Kindly {{ pageType == "signUp" ? "Sign up" : "Login" }} to kick start your journey</h2>
+                  <h1 class="p-2">Welcome to your Todo app</h1>
+                  <h2 class="p-2">Kindly {{ pageType == "signUp" ? "Sign up to kick start your journey" : "Login to continue" }} </h2>
                 </div>
 
                 <p v-if="errorText" :class="[alertType == 'Success' ? 'text-success' : 'text-danger']" class="fw-bold fs-5"> {{ message }} </p>
@@ -17,7 +17,7 @@
                           <span class="visually-hidden">Loading...</span>
                       </div>
                     </div>
-                    
+
                     <div v-else>
                       {{pageType == "signUp" ? "Sign Up with Google" : "Sign In with Google"}}
                     </div>
@@ -165,14 +165,14 @@ h1{
     } */
     .googleBtn{
       padding: 4px 0;
-      font-size: 12px;
+      font-size: 13px;
     }
   
     h1{
-      font-size: 16px;
+      font-size: 17px;
     }
     h2{
-      font-size: 14px;
+      font-size: 15px;
     }
  }
 </style>

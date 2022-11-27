@@ -5,7 +5,7 @@
         <div class=" d-flex justify-content-center " v-if="spinnerShow">
                 <spinner class="mt-5"/>
         </div>
-        
+
         <div v-else class="card row m-2 col-md-7 todocard" v-for="(todo, id) in todos" :key="id" :class="[todo.done ? 'success' : 'bg-light' ]">
             <div class="card-body d-flex justify-content-between">
                 <div class="form-check pt-0 ps-4">
@@ -74,7 +74,7 @@ export default class alltodos extends Vue {
         updateDoc(doc(db, `users/${this.id}/todos`, id), {
             done: !todoToUpdate.done
         })
-        console.log(todoToUpdate);
+        // console.log(todoToUpdate);
         this.currentTask = todoToUpdate
     }
 
