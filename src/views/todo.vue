@@ -6,7 +6,7 @@
 
     <div class="text-center mt-2 mb-4 container">
         <h1 class="p-3 fw-bold text-success sh">Todos</h1>
-        <h5 class="mb-1 fs-4 fw-bold">Good {{ greet() }} <span class="text-success">{{ name }}</span>, Welcome to your todo app.</h5>
+        <h5 class="mb-1 fs-4 fw-bold">Good {{ greet() }} <span class="text-success">{{ name }}</span>. Welcome to your todo app.</h5>
         <h5 class="fs-4 fw-bold">kindly add new todo below.</h5>
     </div>
 
@@ -83,6 +83,7 @@ export default class todo extends Vue {
   done = false
   searchName = ""
   searchActive = false
+  errName = false
   months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
   weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
   d = new Date()
@@ -142,6 +143,8 @@ export default class todo extends Vue {
                     fbTodos.push(todo)
                     this.todos = fbTodos
                     this.searchActive = true 
+                }else{
+                    this.todos = []
                 }      
             }) 
         }) 
