@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import signup from '@/views/signup.vue'
 import todo from '@/views/todo.vue'
-import alltodo from '@/views/alltodo.vue'
-import completed from '@/views/completed.vue'
-import active from '@/views/active.vue'
+// import alltodo from '@/views/alltodo.vue'
+// import completed from '@/views/completed.vue'
+// import active from '@/views/active.vue'
 import notFound from '@/views/notFoundPage.vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -21,30 +21,30 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
-  {
-    path: '/todo/all',
-    name: 'alltodo',
-    component: alltodo,
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/todo/completed',
-    name: 'completed',
-    component: completed,
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/todo/active',
-    name: 'active',
-    component: active,
-    meta: {
-      requiresAuth: true,
-    },
-  },
+  // {
+  //   path: '/todo/all',
+  //   name: 'alltodo',
+  //   component: alltodo,
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
+  // {
+  //   path: '/todo/completed',
+  //   name: 'completed',
+  //   component: completed,
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
+  // {
+  //   path: '/todo/active',
+  //   name: 'active',
+  //   component: active,
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
   {
     path: "/404",
     name: "notFound",
