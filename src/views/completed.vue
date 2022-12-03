@@ -1,5 +1,4 @@
 <template>
-    <todo/>
     <div class="container">
       <div class="row justify-content-center">
         <div class="d-flex mt-5 justify-content-center" v-if="spinnerShow">
@@ -25,7 +24,6 @@
 import {Options, Vue} from "vue-class-component"
 import { db } from "@/firebase.js"
 import spinner from '@/components/spinner.vue'
-import todo from '@/views/todo.vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, doc, updateDoc, where, deleteDoc, query, orderBy } from "firebase/firestore";
 

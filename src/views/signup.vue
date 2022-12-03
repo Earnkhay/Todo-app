@@ -65,7 +65,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
               setTimeout(() => {  
                       this.errorText = false  
                       this.spinnerShow = false
-                      this.$router.push('/todo/all')    
+                      this.$router.push('/todo')    
               },3000) 
           })
           .catch((err) => {
