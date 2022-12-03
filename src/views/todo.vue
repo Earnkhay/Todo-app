@@ -1,7 +1,7 @@
 <template>
     <nav class="nav-item d-flex justify-content-end p-2 logout align-items-center">
           <!-- <i class="fa-solid fa-magnifying-glass fw-bold fs-5 p-1 me-3"></i> -->
-          <div class="w-25">
+          <div class="w-25 searchbar">
             <input class="form-control" v-model="searchName" @input="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
           </div>
           <a class="nav-link btn btn-danger p-1 link-light fw-bold shadow mx-2" @click="logOutAction" v-if="isLoggedIn"> Logout</a>
@@ -262,10 +262,23 @@ export default class todo extends Vue {
    text-shadow: 1px 2px rgba(0, 0, 0, 0.25);
 }
 
-@media screen and (max-width: 294px) {
+@media screen and (max-width: 575px) {
+  .todocard{
+    width: 95%;
+  }
 
+  .searchbar{
+    width: 50% !important;
+  }
+}
+
+@media screen and (max-width: 294px) {
   h5{
       font-size: 1.1rem !important;
+  }
+
+  .searchbar{
+    width: 70% !important;
   }
 }
 </style>
