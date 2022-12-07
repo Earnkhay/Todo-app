@@ -2,7 +2,7 @@
     <nav class="nav-item d-flex justify-content-end p-2 logout align-items-center">
           <!-- <i class="fa-solid fa-magnifying-glass fw-bold fs-5 p-1 me-3"></i> -->
           <div class="w-25 searchbar">
-            <input class="form-control" v-model="searchName" @input="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
+            <input class="form-control" v-model="searchName" @keyup="searchTodos" @touchstart="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
           </div>
           <a class="nav-link btn btn-danger p-1 link-light fw-bold shadow mx-2" @click="logOutAction" v-if="isLoggedIn"> Logout</a>
     </nav>
@@ -31,25 +31,45 @@
             </div>
         </div>
     </div>
-      
+
     <div class="container">
       <div class="row justify-content-center">
-        <div class=" d-flex justify-content-center " v-if="spinnerShow">
-                <spinner class="mt-5"/>
-        </div>
+        <spinner v-if="spinnerShow" :spinnerSize="spinnerSize" class="mt-5"/>
 
-        <div v-else class="card row m-2 col-md-7 todocard" v-for="(todo, id) in todos" :key="id" :class="[todo.done ? 'success' : 'bg-light' ]">
+        <div class="card row m-2 col-md-7 todocard" v-for="(todo, id) in todos" :key="id" :class="[todo.done ? 'success' : 'bg-light' ]">
             <div class="card-body d-flex justify-content-between">
                 <div class="form-check pt-0 ps-4">
                         <input class="form-check-input" type="checkbox" value="" v-model="todo.done" @click.prevent="toggleDone(todo.id)" id="flexCheckDefault">
                 </div>
                 <div class="fw-bold text-wrap text-break" :class="[todo.done ?  'text-decoration-line-through' : 'text-dark']">{{ todo.name }}</div>
                 <div class="flexbtn">
-                    <button class="bg-danger border-danger mx-1 delbtn" @click.prevent="deleteTodo(todo.id)"><i class="fa-solid fa-trash text-light" ></i></button>
+                    <button class="bg-info border-info editbtn" v-if="(todo.done == false)" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="editTodo(todo.id)"><i class="fa-solid fa-pen-to-square text-light" ></i></button>
+                    <button class="bg-danger border-danger mx-1 delbtn" @click="deleteTodo(todo.id)"><i class="fa-solid fa-trash text-light" ></i></button>
                 </div>
             </div>
-      </div>
+        </div>
      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Todo</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="my-3">
+                <input class="form-control" v-model="editname" type="text" aria-label="default input example">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="updateTodo" data-bs-dismiss="modal">Save changes</button>
+        </div>
+        </div>
+    </div>
     </div>
 
 </template>
@@ -71,11 +91,13 @@ export default class todo extends Vue {
   navText1 = "Dashboard"
   name = ""
   newTodo = ""
+  editname = ""
   todos = []
+  currentTodo
   done = false
   searchName = ""
-  searchActive = false
   spinnerShow = false
+  spinnerSize = "spinner-border-lg"
   errName = false
   months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
   weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
@@ -99,8 +121,6 @@ export default class todo extends Vue {
             return "evening"
         }
     } 
-    
-   
   mounted(){ 
     this.spinnerShow = true
       onAuthStateChanged(this.auth, (user) => {
@@ -116,8 +136,9 @@ export default class todo extends Vue {
                 fbTodos.push(todo)
             })
                 this.todos = fbTodos
+                this.spinnerShow = false
             })
-            this.spinnerShow = false
+            
             this.name = this.user.displayName
             this.isLoggedIn = true;
         }
@@ -184,7 +205,7 @@ export default class todo extends Vue {
                 }      
             }) 
         }) 
-    }
+  }
 
     toggleDone(id){
         const todoToUpdate = this.todos.find((todo) => todo.id === id)
@@ -199,12 +220,23 @@ export default class todo extends Vue {
         this.todos = []
     }
 
-   logOutAction(){
-      signOut(this.auth).then(() => {
+    logOutAction(){
+        signOut(this.auth).then(() => {
         this.$router.push("/")
-      })
+        })
     }
 
+    editTodo(id){
+        const todoToUpdate = this.todos.find((todo) => todo.id === id)
+        this.editname = todoToUpdate.name,
+        this.currentTodo = todoToUpdate
+    }
+
+    async updateTodo(){
+        await updateDoc(doc(db, `users/${this.id}/todos`, this.currentTodo.id), {
+            name: this.editname,
+        });
+    }
   
 }
 </script>
@@ -221,6 +253,15 @@ export default class todo extends Vue {
     text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
 }
 
+
+.flexbtn{
+    display: block !important;
+}
+
+.editbtn{
+    margin-bottom: 5px;
+    margin-left: 3px !important;
+}
 .sh{
     text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
 }
