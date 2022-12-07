@@ -12,11 +12,7 @@
 
                 <div class="d-grid gap-2 col-12 mx-auto">
                   <button class="btn btn-lg btn-primary mb-3 googleBtn fw-bold" @click.prevent="signUpWithGoogle" type="button">
-                    <div class="text-center" v-if="spinnerShow">
-                      <div class="spinner-border spinner-border-sm" role="status">
-                          <span class="visually-hidden">Loading...</span>
-                      </div>
-                    </div>
+                    <spinner v-if="spinnerShow" :spinnerSize="spinnerSize"/>
 
                     <div v-else>
                       {{pageType == "signUp" ? "Sign Up with Google" : "Sign In with Google"}}
@@ -35,13 +31,16 @@
 <script>
 import { Options, Vue } from 'vue-class-component';
 import { getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import spinner from '@/components/spinner.vue'
   @Options({
     components: {
+      spinner
     },
   })
   export default class signup extends Vue {
     pageType ="signUp"
     spinnerShow = false
+    spinnerSize = "spinner-border-sm"
     errorText = false
     message = ""
     alertType = ""
