@@ -26,8 +26,8 @@
         <div class="row justify-content-center">
             <div class="btn-group col-md-4">
                 <button @click="viewAll" class="btn btn-primary allbtn shadow" active-class="text-dark fw-bold sh">All</button>
-                <button @click="viewActive" class="btn btn-danger activebtn shadow">Active</button>
-                <button @click="viewCompleted" class="btn btn-success completedbtn shadow">Completed</button>
+                <button @click="filter(false)" class="btn btn-danger activebtn shadow">Active</button>
+                <button @click="filter(true)" class="btn btn-success completedbtn shadow">Completed</button>
             </div>
         </div>
     </div>
@@ -103,9 +103,6 @@ export default class todo extends Vue {
    
   mounted(){ 
     this.spinnerShow = true
-        setTimeout(() => {  
-            this.spinnerShow = false
-        }, 1000) 
       onAuthStateChanged(this.auth, (user) => {
         if (user) {
         onSnapshot(this.todosCollectionQuery, (querySnapshot) => {
@@ -120,6 +117,7 @@ export default class todo extends Vue {
             })
                 this.todos = fbTodos
             })
+            this.spinnerShow = false
             this.name = this.user.displayName
             this.isLoggedIn = true;
         }
@@ -153,27 +151,11 @@ export default class todo extends Vue {
             this.todos = fbTodos
     })
   }
-  viewActive(){
+  filter(status){
     onSnapshot(this.todosCollectionQuery, (querySnapshot) => {
         const fbTodos = []
         querySnapshot.forEach((doc) => {
-            if(doc.data().done == false){
-                const todo = {
-                    id: doc.id,
-                    name: doc.data().name,
-                    done: doc.data().done
-                }
-                fbTodos.push(todo)
-            }
-        })
-            this.todos = fbTodos
-    })
-  }
-  viewCompleted(){
-    onSnapshot(this.todosCollectionQuery, (querySnapshot) => {
-        const fbTodos = []
-        querySnapshot.forEach((doc) => {
-            if(doc.data().done == true){
+            if(doc.data().done == status){
                 const todo = {
                     id: doc.id,
                     name: doc.data().name,
