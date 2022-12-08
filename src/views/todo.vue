@@ -2,7 +2,7 @@
     <nav class="nav-item d-flex justify-content-end p-2 logout align-items-center">
           <!-- <i class="fa-solid fa-magnifying-glass fw-bold fs-5 p-1 me-3"></i> -->
           <div class="w-25 searchbar">
-            <input class="form-control" v-model="searchName" @input="searchTodos" @change="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
+            <input class="form-control" v-model="searchName" @input="searchTodos" @keyup.enter="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
           </div>
           <a class="nav-link btn btn-danger p-1 link-light fw-bold shadow mx-2" @click="logOutAction" v-if="isLoggedIn"> Logout</a>
     </nav>
