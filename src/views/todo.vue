@@ -10,7 +10,7 @@
     <div class="text-center mt-2 mb-4 container">
         <h1 class="p-3 fw-bold text-success sh">Todos</h1>
         <h5 class="mb-1 fs-4 fw-bold">Good {{ greet() }} <span class="text-success">{{ name }}</span>. Welcome to your todo app.</h5>
-        <h5 class="fs-4 fw-bold">kindly add new todo below.</h5>
+        <h5 class="fs-4 fw-bold">Add new todo below.</h5>
     </div>
 
     <div class="d-flex justify-content-center mb-3">
