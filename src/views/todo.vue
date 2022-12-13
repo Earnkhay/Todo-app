@@ -2,7 +2,7 @@
     <nav class="nav-item d-flex justify-content-end p-2 logout align-items-center">
           <!-- <i class="fa-solid fa-magnifying-glass fw-bold fs-5 p-1 me-3"></i> -->
           <div class="w-25 searchbar">
-            <input class="form-control" v-model="searchName" @input="searchTodos" @keyup.enter="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
+            <input class="form-control" v-model="searchName" @input="searchTodos" type="search" placeholder="Search todos....." aria-label="Search">
           </div>
           <a class="nav-link btn btn-danger p-1 link-light fw-bold shadow mx-2" @click="logOutAction" v-if="isLoggedIn"> Logout</a>
     </nav>
@@ -112,7 +112,7 @@ export default class todo extends Vue {
   isLoggedIn = false 
   hour = this.d.getHours()
 
-   greet(){
+  greet(){
         if (this.hour >= 0 && this.hour <= 11) {
             return "morning"            
         } else if(this.hour >= 12 && this.hour <= 17) {
@@ -120,7 +120,7 @@ export default class todo extends Vue {
         }else{
             return "evening"
         }
-    } 
+  } 
   mounted(){ 
     this.spinnerShow = true
       onAuthStateChanged(this.auth, (user) => {
@@ -236,8 +236,7 @@ export default class todo extends Vue {
         await updateDoc(doc(db, `users/${this.id}/todos`, this.currentTodo.id), {
             name: this.editname,
         });
-    }
-  
+    } 
 }
 </script>
 
@@ -252,12 +251,9 @@ export default class todo extends Vue {
     font-size: 17px;
     text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
 }
-
-
 .flexbtn{
     display: block !important;
 }
-
 .editbtn{
     margin-bottom: 5px;
     margin-left: 3px !important;
@@ -278,8 +274,8 @@ export default class todo extends Vue {
 }
 
 .success{
-        background-color: rgb(164, 243, 164);
-    }
+    background-color: rgb(164, 243, 164);
+}
 
 .sh{
    text-shadow: 1px 2px rgba(0, 0, 0, 0.25);
@@ -299,7 +295,6 @@ export default class todo extends Vue {
   h5{
       font-size: 1.1rem !important;
   }
-
   .searchbar{
     width: 70% !important;
   }
