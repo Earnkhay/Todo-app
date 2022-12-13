@@ -5,7 +5,7 @@
             <div class="col-md-12 mt-5">
                 <div class="mb-4 mt-5">
                   <h1 class="p-2">Welcome to your Todo app</h1>
-                  <h2 class="p-2">Kindly {{ pageType == "signUp" ? "Sign up to kick start your journey" : "Login to continue" }} </h2>
+                  <h2 class="p-2">{{ pageType == "signUp" ? "Sign up to kick start your journey" : "Login to continue" }} </h2>
                 </div>
 
                 <p v-if="errorText" :class="[alertType == 'Success' ? 'text-success' : 'text-danger']" class="fw-bold fs-5"> {{ message }} </p>
