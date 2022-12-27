@@ -64,7 +64,7 @@ import spinner from '@/components/spinner.vue'
               setTimeout(() => {  
                       this.errorText = false  
                       this.spinnerShow = false
-                      this.$router.push('/todo')    
+                      this.$router.push('/')    
               },3000) 
           })
           .catch((err) => {
