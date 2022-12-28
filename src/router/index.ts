@@ -6,12 +6,12 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/signup',
     name: 'signup',
     component: signup
   },
   {
-    path: '/todo',
+    path: '/',
     name: 'todo',
     component: todo,
     meta: {
@@ -54,8 +54,8 @@ router.beforeEach(async (to, from, next) => {
     if (await getCurrentUser()) {
       next();
     }else{
-      alert("You do not have access!")
-      next("/")
+      // alert("You do not have access!")
+      next("/signup")
     }
   } else {
     next();

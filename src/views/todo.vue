@@ -222,7 +222,7 @@ export default class todo extends Vue {
 
     logOutAction(){
         signOut(this.auth).then(() => {
-        this.$router.push("/")
+        this.$router.push("/signup")
         })
     }
 
